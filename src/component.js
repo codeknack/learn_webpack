@@ -1,5 +1,5 @@
-export default (text = "Hello Webpack") => {
-  const element = document.createElement("p");
+export default (text = "Hello, Webpack!") => {
+  const element = document.createElement("h1");
 
   element.innerHTML = text;
 

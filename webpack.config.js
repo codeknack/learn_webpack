@@ -1,12 +1,18 @@
-const path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const path = require('path');
 
 module.exports = {
-  entry: './src/app.js',
+  entry: {
+    main: path.resolve(__dirname, './src/app.js'),
+  },
   output: {
     filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'deploy')
+  },
+  devServer: {
+    contentBase: './deploy',
+    open: true
   },
   module: {
     rules: [
@@ -20,23 +26,15 @@ module.exports = {
           }
         }
       },
-      {
-        test: /\.css$/,
-        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
+      { 
+        test: /\.css$/, 
+        use: ["style-loader", "css-loader"] 
       },
       {
-        test: /\.(png|jpg|gif)$/,
-        use: [
-          {
-            loader: 'file-loader'
-          },
-        ],
+        test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+        type: 'asset/resource',
       },
     ]
-  },
-  devServer: {
-    contentBase: './dist',
-    open: true
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -45,6 +43,3 @@ module.exports = {
     new CleanWebpackPlugin()
   ],
 };
-
-
-

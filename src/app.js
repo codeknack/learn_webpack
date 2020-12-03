@@ -1,6 +1,5 @@
-import component from "./component";
-import './style.css'
-import './image-component'
-
+import component from './component';
+import './image-component';
+import './style.css';
 
 document.body.appendChild(component());
